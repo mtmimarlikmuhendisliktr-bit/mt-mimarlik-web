@@ -1,0 +1,611 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services, site } from '../data/site';
+import { ArrowRight, Mail, MapPin } from 'lucide-astro';
+
+const email = site.contact.email;
+const location = site.contact.location;
+
+const serviceOptions = [
+  ...services.map((s) => s.title),
+  'Diğer',
+] as const;
+
+const processSteps = [
+  { no: '01', title: 'İlk görüşme' },
+  { no: '02', title: 'İhtiyaç analizi' },
+  { no: '03', title: 'Proje kapsamının belirlenmesi' },
+] as const;
+---
+<BaseLayout
+  title={`İletişim | ${site.name}`}
+  description="M&T Mimarlık Mühendislik ile projeniz için iletişime geçin. İhtiyaçlarınızı ve beklentilerinizi paylaşarak ilk değerlendirmeyi birlikte yapabiliriz."
+>
+  <main id="icerik" class="contact-page">
+    <section class="contact-hero" aria-labelledby="iletisim-sayfa-baslik">
+      <div class="contact-hero__inner">
+        <h1 id="iletisim-sayfa-baslik" class="contact-hero__title">İletişim</h1>
+      </div>
+    </section>
+
+    <section class="contact-section" aria-labelledby="iletisim-baslik">
+      <div class="contact-layout">
+        <!-- Sol: iletişim bilgileri -->
+        <div class="contact-info">
+          <h2 id="iletisim-baslik">İletişime geçin</h2>
+          <p class="contact-info__lead">
+            Proje talebinizi form üzerinden iletebilir veya doğrudan e-posta gönderebilirsiniz.
+            İlk değerlendirmeyi birlikte yaparak uygun kapsamı netleştirelim.
+          </p>
+
+          <ul class="contact-details">
+            <li>
+              <span class="contact-details__icon" aria-hidden="true">
+                <Mail size={20} strokeWidth={1.5} />
+              </span>
+              <div>
+                <p class="contact-details__label">E-posta</p>
+                <a href={`mailto:${email}`} class="contact-details__value">{email}</a>
+              </div>
+            </li>
+            <li>
+              <span class="contact-details__icon" aria-hidden="true">
+                <MapPin size={20} strokeWidth={1.5} />
+              </span>
+              <div>
+                <p class="contact-details__label">Konum</p>
+                <p class="contact-details__value">{location}</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="contact-process" aria-labelledby="surec-baslik">
+            <h3 id="surec-baslik" class="contact-process__title">Nasıl ilerliyoruz?</h3>
+            <ol class="contact-process__list">
+              {processSteps.map((step) => (
+                <li>
+                  <span class="contact-process__no">{step.no}</span>
+                  <span class="contact-process__label">{step.title}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+
+        <!-- Sağ: proje talep formu -->
+        <div class="contact-form-wrap">
+          <h2 class="contact-form-wrap__title">Projenizi anlatın.</h2>
+
+          <form
+            id="project-request-form"
+            class="contact-form"
+            novalidate
+            data-mailto={email}
+            aria-describedby="form-mailto-note"
+          >
+            <div class="contact-field">
+              <label for="fullName">Ad Soyad <span class="req" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                autocomplete="name"
+                required
+                aria-required="true"
+              />
+              <p class="contact-field__error" data-error-for="fullName" hidden></p>
+            </div>
+
+            <div class="contact-field">
+              <label for="email">E-posta <span class="req" aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+              <p class="contact-field__error" data-error-for="email" hidden></p>
+            </div>
+
+            <div class="contact-field">
+              <label for="phone">Telefon <span class="opt">(isteğe bağlı)</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+              />
+              <p class="contact-field__error" data-error-for="phone" hidden></p>
+            </div>
+
+            <div class="contact-field">
+              <label for="serviceType">Hizmet Türü <span class="req" aria-hidden="true">*</span></label>
+              <select id="serviceType" name="serviceType" required aria-required="true">
+                <option value="" disabled selected>Seçiniz</option>
+                {serviceOptions.map((opt) => (
+                  <option value={opt}>{opt}</option>
+                ))}
+              </select>
+              <p class="contact-field__error" data-error-for="serviceType" hidden></p>
+            </div>
+
+            <div class="contact-field">
+              <label for="details">Proje Detayları <span class="req" aria-hidden="true">*</span></label>
+              <textarea
+                id="details"
+                name="details"
+                rows="5"
+                required
+                aria-required="true"
+                placeholder="Projenizin kapsamı, konum veya arsa bilgisi ve beklentileriniz…"
+              ></textarea>
+              <p class="contact-field__error" data-error-for="details" hidden></p>
+            </div>
+
+            <button type="submit" class="contact-submit">
+              Proje Talebi Gönder <ArrowRight size={16} aria-hidden="true" />
+            </button>
+
+            <p class="contact-form__note" id="form-mailto-note">
+              Form, e-posta uygulamanızda bir taslak oluşturur. Gönderim işlemini e-posta uygulamanız
+              üzerinden tamamlamanız gerekir.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    background: #FFFFFF;
+    color: #151515;
+  }
+
+  .contact-hero {
+    background: #FFFFFF;
+  }
+
+  .contact-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1320px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem;
+    text-align: center;
+  }
+
+  .contact-hero__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .contact-section {
+    padding: 0 1.25rem 4.5rem;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+
+  .contact-info h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .contact-info__lead {
+    margin: 1.25rem 0 0;
+    max-width: 28rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-stone-dark);
+  }
+
+  .contact-details {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-details li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .contact-details__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+  }
+
+  .contact-details__label {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-stone);
+  }
+
+  .contact-details__value {
+    margin: 0.35rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: var(--color-ink);
+    word-break: break-word;
+  }
+
+  a.contact-details__value {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  a.contact-details__value:hover {
+    opacity: 0.7;
+  }
+
+  .contact-process {
+    margin-top: 2.75rem;
+    max-width: 22rem;
+  }
+
+  .contact-process__title {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .contact-process__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-process__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .contact-process__list li:last-child {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .contact-process__no {
+    flex-shrink: 0;
+    min-width: 1.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-stone);
+  }
+
+  .contact-process__label {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+
+  .contact-form-wrap {
+    min-width: 0;
+    width: 100%;
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--color-line);
+    background: #FFFFFF;
+  }
+
+  .contact-form-wrap__title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 22px;
+    margin-top: 1.75rem;
+  }
+
+  .contact-form__note {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.55;
+    color: var(--color-stone);
+  }
+
+  .contact-field {
+    display: grid;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .contact-field label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .contact-field .req {
+    color: var(--color-ink);
+  }
+
+  .contact-field .opt {
+    font-weight: 400;
+    color: var(--color-stone);
+  }
+
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 0;
+    background: #fff;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 16px; /* iOS zoom önleme */
+    line-height: 1.4;
+    appearance: none;
+  }
+
+  .contact-field input,
+  .contact-field select {
+    min-height: 48px;
+  }
+
+  .contact-field select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-stone-dark) 50%),
+      linear-gradient(135deg, var(--color-stone-dark) 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2.5rem;
+  }
+
+  .contact-field textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  .contact-field input:focus,
+  .contact-field select:focus,
+  .contact-field textarea:focus {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-color: var(--color-ink);
+  }
+
+  .contact-field.is-invalid input,
+  .contact-field.is-invalid select,
+  .contact-field.is-invalid textarea {
+    border-color: #8a2e2e;
+  }
+
+  .contact-field.is-invalid input:focus,
+  .contact-field.is-invalid select:focus,
+  .contact-field.is-invalid textarea:focus {
+    outline-color: #8a2e2e;
+  }
+
+  .contact-field__error {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #8a2e2e;
+  }
+
+  .contact-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.95rem 1.5rem;
+    border: none;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .contact-submit:hover {
+    background: var(--color-ink-soft);
+  }
+
+  .contact-submit:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 768px) {
+    .contact-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .contact-hero__title {
+      font-size: 3.5rem;
+    }
+
+    .contact-section {
+      padding: 0 2rem 5.5rem;
+    }
+
+    .contact-form-wrap {
+      padding: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-hero__inner {
+      min-height: 12rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .contact-hero__title {
+      font-size: 4rem;
+    }
+
+    .contact-section {
+      padding: 0 2rem 6rem;
+    }
+
+    .contact-layout {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-form {
+      gap: 24px;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('project-request-form') as HTMLFormElement | null;
+
+  if (form) {
+    const mailtoTarget = form.dataset.mailto || '';
+
+    const messages: Record<string, string> = {
+      fullName: 'Lütfen adınızı ve soyadınızı girin.',
+      email: 'Geçerli bir e-posta adresi girin.',
+      serviceType: 'Lütfen bir hizmet türü seçin.',
+      details: 'Lütfen proje detaylarını yazın.',
+    };
+
+    function setError(name: string, message: string | null) {
+      const field = form!.querySelector(`[name="${name}"]`)?.closest('.contact-field');
+      const errorEl = form!.querySelector(`[data-error-for="${name}"]`) as HTMLElement | null;
+      const input = form!.querySelector(`[name="${name}"]`) as HTMLElement | null;
+      if (!field || !errorEl || !input) return;
+
+      if (message) {
+        field.classList.add('is-invalid');
+        errorEl.hidden = false;
+        errorEl.textContent = message;
+        input.setAttribute('aria-invalid', 'true');
+      } else {
+        field.classList.remove('is-invalid');
+        errorEl.hidden = true;
+        errorEl.textContent = '';
+        input.removeAttribute('aria-invalid');
+      }
+    }
+
+    function validateEmail(value: string) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function validate() {
+      const data = new FormData(form!);
+      const fullName = String(data.get('fullName') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const serviceType = String(data.get('serviceType') || '').trim();
+      const details = String(data.get('details') || '').trim();
+
+      let ok = true;
+
+      if (!fullName) {
+        setError('fullName', messages.fullName);
+        ok = false;
+      } else {
+        setError('fullName', null);
+      }
+
+      if (!email || !validateEmail(email)) {
+        setError('email', messages.email);
+        ok = false;
+      } else {
+        setError('email', null);
+      }
+
+      setError('phone', null);
+
+      if (!serviceType) {
+        setError('serviceType', messages.serviceType);
+        ok = false;
+      } else {
+        setError('serviceType', null);
+      }
+
+      if (!details) {
+        setError('details', messages.details);
+        ok = false;
+      } else {
+        setError('details', null);
+      }
+
+      return { ok, fullName, email, serviceType, details, phone: String(data.get('phone') || '').trim() };
+    }
+
+    form.querySelectorAll('input, select, textarea').forEach((el) => {
+      el.addEventListener('input', () => {
+        const name = (el as HTMLInputElement).name;
+        if (name) setError(name, null);
+      });
+      el.addEventListener('change', () => {
+        const name = (el as HTMLInputElement).name;
+        if (name) setError(name, null);
+      });
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const result = validate();
+      if (!result.ok || !mailtoTarget) return;
+
+      // Gerçek backend yok: yalnızca e-posta taslağı açılır (otomatik gönderim değil).
+      const subject = `Proje Talebi — ${result.serviceType}`;
+      const body = [
+        'Yeni proje talebi',
+        '',
+        `Ad Soyad: ${result.fullName}`,
+        `E-posta: ${result.email}`,
+        `Telefon: ${result.phone || '—'}`,
+        `Hizmet Türü: ${result.serviceType}`,
+        '',
+        'Proje Detayları:',
+        result.details,
+      ].join('\n');
+
+      const href = `mailto:${mailtoTarget}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+    });
+  }
+</script>

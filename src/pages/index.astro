@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Approach from '../components/Approach.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
+import ContactCta from '../components/ContactCta.astro';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title={`${site.name} | Mimari Tasarım ve Mühendislik`}
+  description={site.description}
+>
+  <main id="icerik" class="home-page">
+    <Hero />
+    <Approach />
+    <Services />
+    <Projects />
+    <ContactCta />
+  </main>
+</BaseLayout>
+
+<style>
+  .home-page {
+    background: #f5f4f0;
+  }
+</style>

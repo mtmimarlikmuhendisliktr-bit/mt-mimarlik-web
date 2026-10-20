@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+/**
+ * Çalışma alanları — gerçek portföy değil; disiplinleri tanıtır.
+ * Görseller temsili; tamamlanmış M&T projesi değildir.
+ */
+const workAreas = [
+  {
+    title: 'Mimari Tasarım',
+    href: '/hizmetlerimiz#mimari-tasarim',
+    src: '/images/projects/mimari.jpg',
+    alt: 'Temsili görsel: modern mimari dış mekân',
+  },
+  {
+    title: 'Yapısal Mühendislik',
+    href: '/hizmetlerimiz#muhendislik-hizmetleri',
+    src: '/images/projects/muhendislik.jpg',
+    alt: 'Temsili görsel: yapısal inşaat ve mühendislik bağlamı',
+  },
+  {
+    title: 'İç Mekân',
+    href: '/hizmetlerimiz#mimari-tasarim',
+    src: '/images/projects/ic-mekan.jpg',
+    alt: 'Temsili görsel: aydınlık modern iç mekân',
+  },
+  {
+    title: 'Proje Koordinasyonu',
+    href: '/hizmetlerimiz#danismanlik-ve-proje-yonetimi',
+    src: '/images/projects/koordinasyon.jpg',
+    alt: 'Temsili görsel: çalışma ve koordinasyon ortamı',
+  },
+] as const;
+---
+<BaseLayout
+  title={`Projeler | ${site.name}`}
+  description="M&T Mimarlık Mühendislik çalışma alanları ve yaklaşımı. Doğrulanmış proje portföyü hazırlandığında bu sayfada yayımlanacaktır."
+>
+  <main id="icerik" class="projects-page">
+    <section class="projects-hero" aria-labelledby="projeler-baslik">
+      <div class="projects-hero__inner">
+        <h1 id="projeler-baslik" class="projects-hero__title">Projeler</h1>
+      </div>
+    </section>
+
+    <section class="projects-gallery" aria-labelledby="projeler-galeri-baslik">
+      <div class="projects-gallery__inner">
+        <h2 id="projeler-galeri-baslik" class="visually-hidden">Çalışma alanları</h2>
+
+        <ul class="projects-grid">
+          {workAreas.map((area) => (
+            <li class="projects-item">
+              <a href={area.href} class="projects-item__link">
+                <div class="projects-item__frame">
+                  <img
+                    src={area.src}
+                    alt={area.alt}
+                    width="1400"
+                    height="933"
+                    class="projects-item__img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <h3 class="projects-item__title">{area.title}</h3>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="projects-status" aria-labelledby="portfoy-baslik">
+          <h2 id="portfoy-baslik">Portföyümüz hazırlanıyor.</h2>
+          <p>
+            Doğrulanmış proje çalışmalarımız paylaşılmaya hazır olduğunda bu alanda yer vereceğiz.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    background: #FFFFFF;
+    color: #151515;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .projects-hero {
+    background: #FFFFFF;
+  }
+
+  .projects-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1320px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem;
+    text-align: center;
+  }
+
+  .projects-hero__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .projects-gallery {
+    background: #FFFFFF;
+  }
+
+  .projects-gallery__inner {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding: 0 1.25rem 4.5rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 1.375rem;
+    row-gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .projects-item {
+    min-width: 0;
+  }
+
+  .projects-item__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .projects-item__frame {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #ebe7df;
+  }
+
+  .projects-item__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 300ms ease;
+  }
+
+  .projects-item__link:hover .projects-item__img {
+    transform: scale(1.03);
+  }
+
+  .projects-item__title {
+    margin: 0.95rem 0 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    text-align: center;
+    color: #151515;
+  }
+
+  .projects-status {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ebe7df;
+    text-align: center;
+  }
+
+  .projects-status h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #151515;
+  }
+
+  .projects-status p {
+    margin: 0.6rem auto 0;
+    max-width: 32rem;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #666666;
+  }
+
+  @media (min-width: 768px) {
+    .projects-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .projects-hero__title {
+      font-size: 3.5rem;
+    }
+
+    .projects-gallery__inner {
+      padding: 0 2rem 5.5rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.375rem;
+      row-gap: 2.5rem;
+    }
+
+    .projects-item__title {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-hero__inner {
+      min-height: 12rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .projects-hero__title {
+      font-size: 4rem;
+    }
+
+    .projects-gallery__inner {
+      padding: 0 2rem 6rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 1.5rem;
+      row-gap: 2.5rem;
+    }
+
+    .projects-status {
+      margin-top: 4rem;
+    }
+  }
+</style>

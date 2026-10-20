@@ -1,0 +1,275 @@
+---
+import { Menu, ArrowUpRight, X } from 'lucide-astro';
+import Logo from './Logo.astro';
+import { nav } from '../data/site';
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = pathname === '/';
+
+function isActive(href: string) {
+  const normalized = href.replace(/\/$/, '') || '/';
+  return pathname === normalized;
+}
+---
+<header
+  class:list={[
+    'site-header',
+    isHome ? 'site-header--home' : 'site-header--solid',
+  ]}
+  data-header
+  data-home={isHome ? 'true' : 'false'}
+>
+  <div class="site-header__inner mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 sm:gap-8 lg:gap-10 lg:px-8">
+    <Logo inverted size="header" />
+
+    <nav aria-label="Ana gezinme" class="site-header__nav hidden lg:block">
+      <ul class="flex items-center gap-9 text-sm">
+        {nav.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={['site-header__link', active && 'is-active']}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <a href="/iletisim" class="site-header__cta hidden shrink-0 lg:inline-flex">
+      Teklif Alın <ArrowUpRight size={16} aria-hidden="true" />
+    </a>
+
+    <details class="site-nav-mobile relative shrink-0 lg:hidden">
+      <summary class="site-nav-mobile__toggle" aria-label="Menüyü aç veya kapat">
+        <span class="site-nav-mobile__icon site-nav-mobile__icon--open" aria-hidden="true">
+          <Menu size={20} />
+        </span>
+        <span class="site-nav-mobile__icon site-nav-mobile__icon--close" aria-hidden="true">
+          <X size={20} />
+        </span>
+      </summary>
+      <nav aria-label="Mobil gezinme" class="site-nav-mobile__panel">
+        <ul class="flex flex-col gap-1 text-base">
+          {nav.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'site-nav-mobile__link',
+                    active && 'is-active',
+                  ]}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <a href="/iletisim" class="site-header__cta site-header__cta--block mt-5">Teklif Alın</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+{!isHome && <div class="site-header-spacer" aria-hidden="true"></div>}
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    color: #fff;
+    transition: background-color 250ms ease, border-color 250ms ease;
+  }
+
+  .site-header.is-scrolled,
+  .site-header--solid {
+    background-color: #111111;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .site-header__inner {
+    min-height: 88px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__inner {
+      min-height: 108px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+  }
+
+  .site-header-spacer {
+    height: 88px;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header-spacer {
+      height: 108px;
+    }
+  }
+
+  .site-header__link {
+    color: rgba(255, 255, 255, 0.86);
+    text-decoration: none;
+    transition: color 250ms ease;
+  }
+
+  .site-header__link:hover,
+  .site-header__link.is-active {
+    color: #fff;
+  }
+
+  .site-header__link.is-active {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 0.15rem;
+    font-weight: 500;
+  }
+
+  .site-header__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.7rem 1.15rem;
+    background: #fff;
+    color: #111;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 250ms ease, color 250ms ease;
+  }
+
+  .site-header__cta:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .site-header__cta--block {
+    width: 100%;
+  }
+
+  .site-nav-mobile__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    list-style: none;
+    list-style-type: none;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: #fff;
+  }
+
+  /* Flex satırında outside marker sol tarafta beyaz üçgen olarak sızabiliyor */
+  .site-nav-mobile__toggle::marker,
+  .site-nav-mobile__toggle::-webkit-details-marker {
+    display: none;
+    content: none;
+    color: transparent;
+  }
+
+  .site-nav-mobile__icon--close {
+    display: none;
+  }
+
+  .site-nav-mobile[open] .site-nav-mobile__icon--open {
+    display: none;
+  }
+
+  .site-nav-mobile[open] .site-nav-mobile__icon--close {
+    display: block;
+  }
+
+  .site-nav-mobile__panel {
+    position: absolute;
+    right: 0;
+    z-index: 60;
+    margin-top: 0.75rem;
+    width: min(18rem, calc(100vw - 2.5rem));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #111111;
+    color: #fff;
+    padding: 1.25rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .site-nav-mobile__link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.35rem 0;
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+  }
+
+  .site-nav-mobile__link:hover,
+  .site-nav-mobile__link.is-active {
+    color: #fff;
+  }
+
+  .site-nav-mobile__link.is-active {
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  const mobileNav = document.querySelector('.site-nav-mobile');
+  const isHome = header?.getAttribute('data-home') === 'true';
+
+  function updateHeader() {
+    if (!(header instanceof HTMLElement) || !isHome) return;
+    if (window.scrollY > 50) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+  }
+
+  if (isHome) {
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+  }
+
+  if (mobileNav instanceof HTMLDetailsElement) {
+    mobileNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileNav.open = false;
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (!mobileNav.open) return;
+      if (!mobileNav.contains(target)) {
+        mobileNav.open = false;
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileNav.open) {
+        mobileNav.open = false;
+      }
+    });
+  }
+</script>

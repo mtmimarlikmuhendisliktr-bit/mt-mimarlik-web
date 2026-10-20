@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { references, site } from '../data/site';
+---
+<BaseLayout
+  title={`Referanslar | ${site.name}`}
+  description="Kurucumuzun önceki mesleki deneyimlerini yansıtan kurumlar. Bu liste M&T Mimarlık Mühendislik'in kurumsal proje portföyü değildir."
+>
+  <main id="icerik" class="refs-page">
+    <section class="refs-hero" aria-labelledby="referanslar-baslik">
+      <div class="refs-hero__inner">
+        <h1 id="referanslar-baslik" class="refs-hero__title">Referanslar</h1>
+      </div>
+    </section>
+
+    <section class="refs-main" aria-labelledby="mesleki-deneyimler-baslik">
+      <div class="refs-main__inner">
+        <header class="refs-intro">
+          <h2 id="mesleki-deneyimler-baslik" class="refs-intro__title">
+            Mesleki Deneyimlerimiz
+          </h2>
+          <p class="refs-intro__lead">
+            Aşağıdaki çalışmalar, M&T Mimarlık Mühendislik kurulmadan önce edinilen bireysel mesleki deneyimleri yansıtır.
+          </p>
+        </header>
+
+        <ul class="refs-list">
+          {references.map((org) => (
+            <li class="refs-list__item">
+              <article class="refs-card">
+                <div class="refs-card__logo-wrap">
+                  <img
+                    src={org.logo}
+                    alt={org.alt ?? `${org.name} logosu`}
+                    class="refs-card__logo"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <h3 class="refs-card__name">{org.name}</h3>
+                <p class="refs-card__role">{org.roleTitle}</p>
+                <p class="refs-card__text">{org.description}</p>
+              </article>
+            </li>
+          ))}
+        </ul>
+
+        <p class="refs-main__note">
+          Bu sayfada yer alan kurumlar ve çalışmalar, kurucumuzun önceki mesleki deneyimlerini yansıtmaktadır. Belirtilen çalışmalar M&T Mimarlık Mühendislik'in kurumsal proje portföyü olarak sunulmamaktadır.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .refs-page {
+    background: #FFFFFF;
+    color: #151515;
+  }
+
+  .refs-hero {
+    background: #FFFFFF;
+  }
+
+  .refs-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1320px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem;
+    text-align: center;
+  }
+
+  .refs-hero__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .refs-main {
+    background: #FFFFFF;
+  }
+
+  .refs-main__inner {
+    max-width: 1080px;
+    margin-inline: auto;
+    padding: 0 1.25rem 4.5rem;
+  }
+
+  .refs-intro {
+    max-width: 36rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .refs-intro__title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: #151515;
+  }
+
+  .refs-intro__lead {
+    margin: 1rem 0 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555555;
+  }
+
+  .refs-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #ebe7df;
+  }
+
+  .refs-list__item {
+    min-width: 0;
+    border-bottom: 1px solid #ebe7df;
+  }
+
+  .refs-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.25rem 0;
+  }
+
+  .refs-card__logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 3.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .refs-card__logo {
+    display: block;
+    width: auto;
+    max-width: 11rem;
+    height: auto;
+    max-height: 3.25rem;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .refs-card__name {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #777777;
+  }
+
+  .refs-card__role {
+    margin: 0.65rem 0 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    color: #151515;
+  }
+
+  .refs-card__text {
+    margin: 0.85rem 0 0;
+    max-width: 34rem;
+    font-size: 0.975rem;
+    line-height: 1.7;
+    color: #555555;
+  }
+
+  .refs-main__note {
+    margin: 3rem auto 0;
+    max-width: 40rem;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    text-align: center;
+    color: #777777;
+  }
+
+  @media (min-width: 768px) {
+    .refs-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .refs-hero__title {
+      font-size: 3.5rem;
+    }
+
+    .refs-main__inner {
+      padding: 0 2rem 5.5rem;
+    }
+
+    .refs-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 0;
+      margin-top: 3.5rem;
+      border-top: 1px solid #ebe7df;
+    }
+
+    .refs-list__item {
+      border-bottom: 1px solid #ebe7df;
+    }
+
+    .refs-list__item:nth-child(odd) {
+      padding-right: 2.5rem;
+      border-right: 1px solid #ebe7df;
+    }
+
+    .refs-list__item:nth-child(even) {
+      padding-left: 2.5rem;
+    }
+
+    /* Beşinci öğe: sol sütun genişliğinde, düzeni bozmadan */
+    .refs-list__item:last-child:nth-child(odd) {
+      grid-column: 1 / 2;
+      border-right: none;
+      padding-right: 2.5rem;
+    }
+
+    .refs-card {
+      padding: 2.75rem 0;
+      height: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .refs-hero__inner {
+      min-height: 12rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .refs-hero__title {
+      font-size: 4rem;
+    }
+
+    .refs-main__inner {
+      padding: 0 2rem 6rem;
+    }
+
+    .refs-list__item:nth-child(odd) {
+      padding-right: 3.25rem;
+    }
+
+    .refs-list__item:nth-child(even) {
+      padding-left: 3.25rem;
+    }
+
+    .refs-list__item:last-child:nth-child(odd) {
+      padding-right: 3.25rem;
+    }
+
+    .refs-card__logo {
+      max-width: 12.5rem;
+      max-height: 3.5rem;
+    }
+
+    .refs-card__role {
+      font-size: 1.2rem;
+    }
+
+    .refs-main__note {
+      margin-top: 3.5rem;
+    }
+  }
+</style>

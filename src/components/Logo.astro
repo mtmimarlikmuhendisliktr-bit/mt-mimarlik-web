@@ -1,0 +1,73 @@
+---
+// Ortak logo: public/brand/mt-logo.png (açık zemin) ve mt-logo-light.png (koyu zemin).
+// Kaynak: src/assets/Modern M&T Mimarlık Mühendislik Logosu.png
+interface Props {
+  inverted?: boolean;
+  size?: 'header' | 'footer';
+  class?: string;
+}
+const { inverted = false, size = 'header', class: className = '' } = Astro.props;
+const src = inverted ? '/brand/mt-logo-light.png' : '/brand/mt-logo.png';
+---
+<a
+  href="/"
+  class:list={['logo', `logo--${size}`, className]}
+  aria-label="M&T Mimarlık Mühendislik, ana sayfa"
+>
+  <img
+    src={src}
+    alt=""
+    width="284"
+    height="220"
+    class="logo__img"
+    decoding="async"
+  />
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  .logo__img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  /* Header: mobilde okunabilir, masaüstünde ~80px görünür yükseklik */
+  .logo--header .logo__img {
+    height: 60px;
+    max-width: min(160px, 48vw);
+  }
+
+  @media (min-width: 640px) {
+    .logo--header .logo__img {
+      height: 70px;
+      max-width: 190px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .logo--header .logo__img {
+      height: 80px;
+      max-width: none;
+    }
+  }
+
+  /* Footer: mobilde okunabilir, masaüstünde ~110px */
+  .logo--footer .logo__img {
+    height: 88px;
+  }
+
+  @media (min-width: 768px) {
+    .logo--footer .logo__img {
+      height: 110px;
+    }
+  }
+</style>

@@ -1,0 +1,355 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services, site } from '../data/site';
+import { ArrowRight } from 'lucide-astro';
+
+const visuals = [
+  {
+    src: '/images/services/mimari-tasarim.jpg',
+    alt: 'Temsili mimari görsel: geometrik modern yapı cephesi',
+    credit: 'Unsplash',
+    creditHref: 'https://unsplash.com/license',
+  },
+  {
+    src: '/images/services/muhendislik.jpg',
+    alt: 'Temsili mimari görsel: modern konut dış cephesi',
+    credit: 'Unsplash',
+    creditHref: 'https://unsplash.com/license',
+  },
+  {
+    src: '/images/services/tesisat.jpg',
+    alt: 'Temsili mimari görsel: aydınlık ofis ve çalışma alanı',
+    credit: 'Unsplash',
+    creditHref: 'https://unsplash.com/license',
+  },
+  {
+    src: '/images/services/danismanlik.jpg',
+    alt: 'Temsili mimari görsel: minimalist iç mekân detayı',
+    credit: 'Unsplash',
+    creditHref: 'https://unsplash.com/license',
+  },
+] as const;
+---
+<BaseLayout
+  title={`Hizmetlerimiz | ${site.name}`}
+  description="Mimari tasarım, mühendislik hizmetleri, tesisat koordinasyonu ile danışmanlık ve proje yönetimi alanlarında M&T Mimarlık Mühendislik hizmetleri."
+>
+  <main id="icerik" class="services-page">
+    <section class="services-hero" aria-labelledby="hizmetler-baslik">
+      <div class="services-hero__inner">
+        <h1 id="hizmetler-baslik" class="services-hero__title">Hizmetlerimiz</h1>
+      </div>
+    </section>
+
+    <section class="service-list" aria-label="Hizmet detayları">
+      {services.map((service, index) => {
+        const visual = visuals[index];
+        const reverse = index % 2 === 1;
+        return (
+          <article
+            id={service.slug}
+            class:list={['service-block', reverse && 'service-block--reverse']}
+          >
+            <div class="service-block__inner">
+              <div class="service-block__copy">
+                <p class="service-block__no">{String(index + 1).padStart(2, '0')}</p>
+                <h2 class="service-block__title">{service.title}</h2>
+                <p class="service-block__summary">{service.summary}</p>
+                <div class="service-block__body">
+                  {service.body.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+                <a href="/iletisim" class="btn-ghost service-block__cta">
+                  Bu hizmet için iletişime geçin <ArrowRight size={16} aria-hidden="true" />
+                </a>
+              </div>
+
+              <figure class="service-block__media">
+                <div class="service-block__frame">
+                  <img
+                    src={visual.src}
+                    alt={visual.alt}
+                    width="1600"
+                    height="1067"
+                    class="service-block__img"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="service-block__credit">
+                  Temsili görsel ·
+                  <a href={visual.creditHref} rel="noopener noreferrer" target="_blank">
+                    {visual.credit}
+                  </a>
+                  <span aria-hidden="true"> · </span>
+                  <a href="https://unsplash.com/license" rel="noopener noreferrer" target="_blank">
+                    Unsplash License
+                  </a>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+
+    <section class="services-cta" aria-labelledby="hizmet-cta-baslik">
+      <div class="services-cta__inner">
+        <div class="services-cta__copy">
+          <h2 id="hizmet-cta-baslik">Projeniz için hangi hizmet gerekli?</h2>
+          <p>İhtiyaçlarınızı paylaşın; kapsamı birlikte netleştirelim.</p>
+        </div>
+        <a href="/iletisim" class="btn-primary shrink-0">
+          İletişime geçin <ArrowRight size={16} aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .services-page {
+    background: #FFFFFF;
+    color: #151515;
+  }
+
+  .services-hero {
+    background: #FFFFFF;
+  }
+
+  .services-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1320px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem;
+    text-align: center;
+  }
+
+  .services-hero__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .service-list {
+    background: #FFFFFF;
+  }
+
+  .service-block {
+    scroll-margin-top: 7rem;
+    border-bottom: 1px solid #ebe7df;
+    background: #FFFFFF;
+  }
+
+  .service-block__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: 2.5rem 1.25rem;
+  }
+
+  /* Projeler sayfasındaki başlık → içerik boşluğuyla aynı */
+  .service-block:first-child .service-block__inner {
+    padding-top: 0;
+  }
+
+  .service-block__copy {
+    min-width: 0;
+    max-width: 40rem;
+  }
+
+  .service-block__no {
+    margin: 0;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    font-variant-numeric: tabular-nums;
+    color: #777777;
+  }
+
+  .service-block__title {
+    margin: 12px 0 0;
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #151515;
+  }
+
+  .service-block__summary {
+    margin: 20px 0 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555555;
+  }
+
+  .service-block__body {
+    display: grid;
+    gap: 1rem;
+    margin-top: 24px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555555;
+  }
+
+  .service-block__body p {
+    margin: 0;
+  }
+
+  .service-block__cta {
+    margin-top: 32px;
+  }
+
+  .service-block__media {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  .service-block__frame {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: #ebe7df;
+  }
+
+  .service-block__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .service-block__credit {
+    margin-top: 0.65rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #777777;
+  }
+
+  .service-block__credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .service-block__credit a:hover {
+    color: #151515;
+  }
+
+  .services-cta {
+    background: #FFFFFF;
+    border-top: 1px solid #ebe7df;
+    padding: 3.5rem 1.25rem;
+  }
+
+  .services-cta__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+
+  .services-cta__copy h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #151515;
+  }
+
+  .services-cta__copy p {
+    margin: 0.75rem 0 0;
+    color: #555555;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .services-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .services-hero__title {
+      font-size: 3.5rem;
+    }
+
+    .service-block__inner {
+      padding: 3rem 2rem;
+      gap: 2.5rem;
+    }
+
+    .service-block:first-child .service-block__inner {
+      padding-top: 0;
+    }
+
+    .service-block__title {
+      font-size: 2rem;
+    }
+
+    .services-cta {
+      padding: 4rem 2rem;
+    }
+
+    .services-cta__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-hero__inner {
+      min-height: 12rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .services-hero__title {
+      font-size: 4rem;
+    }
+
+    .service-block__inner {
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+      align-items: start;
+      gap: 48px;
+      padding: 3.5rem 2rem;
+    }
+
+    .service-block:first-child .service-block__inner {
+      padding-top: 0;
+    }
+
+    .service-block--reverse .service-block__inner {
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    }
+
+    .service-block--reverse .service-block__copy {
+      order: 2;
+    }
+
+    .service-block--reverse .service-block__media {
+      order: 1;
+    }
+
+    .service-block__copy {
+      max-width: none;
+    }
+
+    .service-block__title {
+      font-size: 2.375rem;
+    }
+  }
+</style>

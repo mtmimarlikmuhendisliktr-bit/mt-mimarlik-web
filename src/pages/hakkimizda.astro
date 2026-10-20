@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title={`Hakkımızda | ${site.name}`}
+  description="M&T Mimarlık Mühendislik, mimari tasarım ve mühendislik disiplinlerini bütüncül bir yaklaşımla ele alan bir oluşumdur."
+>
+  <main id="icerik" class="about-page">
+    <section class="about-hero" aria-labelledby="hakkimizda-baslik">
+      <div class="about-hero__inner">
+        <h1 id="hakkimizda-baslik" class="about-hero__title">Hakkımızda</h1>
+      </div>
+    </section>
+
+    <section class="about-main" aria-labelledby="biz-kimiz-baslik">
+      <div class="about-main__inner">
+        <div class="about-main__copy">
+          <p class="about-kicker">Biz Kimiz?</p>
+          <h2 id="biz-kimiz-baslik" class="about-main__title">
+            M&T Mimarlık Mühendislik
+          </h2>
+          <div class="about-main__text">
+            <p>
+              M&T Mimarlık Mühendislik, mimari tasarım ve mühendislik disiplinlerini bütüncül bir yaklaşımla ele alan bir oluşumdur.
+            </p>
+            <p>
+              Her projenin kendine özgü ihtiyaçları olduğuna inanıyor; estetik, işlevsellik ve teknik gereklilikleri bir arada değerlendiriyoruz.
+            </p>
+            <p>
+              Tasarım sürecinde mekânın karakterini, kullanıcı beklentilerini ve uygulanabilirliği ön planda tutuyoruz. Amacımız, yalnızca görsel açıdan güçlü değil, aynı zamanda uzun ömürlü ve nitelikli yaşam alanları oluşturmaktır.
+            </p>
+            <p>
+              İlk fikirden uygulama aşamasına kadar tasarım ve mühendislik süreçlerinin birbiriyle uyumlu ilerlemesini önemsiyoruz.
+            </p>
+          </div>
+        </div>
+
+        <figure class="about-main__media">
+          <div class="about-main__frame">
+            <img
+              src="/images/about/mimarlik-atolyesi.jpg"
+              alt="Konsept mimari görsel: Akdeniz manzaralı mimarlık atölyesi ortamı"
+              width="1536"
+              height="1024"
+              class="about-main__img"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .about-page {
+    background: #fff;
+    color: #151515;
+  }
+
+  .about-hero {
+    background: #FFFFFF;
+  }
+
+  .about-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem;
+    text-align: center;
+  }
+
+  .about-hero__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .about-main {
+    background: #fff;
+  }
+
+  .about-main__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 0 1.25rem 4.5rem;
+    align-items: center;
+  }
+
+  .about-kicker {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #777777;
+  }
+
+  .about-main__title {
+    margin: 1rem 0 0;
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #151515;
+  }
+
+  .about-main__text {
+    margin-top: 1.5rem;
+  }
+
+  .about-main__text p {
+    margin: 0;
+    font-size: 1.015rem;
+    line-height: 1.7;
+    color: #555555;
+  }
+
+  .about-main__text p + p {
+    margin-top: 1.35rem;
+  }
+
+  .about-main__media {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .about-main__frame {
+    aspect-ratio: 6 / 5;
+    overflow: hidden;
+    background: #ebe7df;
+  }
+
+  .about-main__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (min-width: 768px) {
+    .about-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .about-hero__title {
+      font-size: 3.5rem;
+    }
+
+    .about-main__inner {
+      padding: 0 2rem 5.5rem;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-hero__inner {
+      min-height: 12rem;
+      padding: 3.75rem 2rem;
+    }
+
+    .about-hero__title {
+      font-size: 4rem;
+    }
+
+    .about-main__inner {
+      grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+      gap: 4.5rem;
+      padding: 0 2rem 6.5rem;
+      align-items: center;
+    }
+
+    .about-main__title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

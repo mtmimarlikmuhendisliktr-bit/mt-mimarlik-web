@@ -1,0 +1,170 @@
+---
+const cards = [
+  {
+    title: 'Mimari Tasarım',
+    href: '/hizmetlerimiz#mimari-tasarim',
+    src: '/images/home/akdeniz-villa.jpg',
+    alt: 'Konsept mimari görsel: akdeniz modern villasında gün batımı',
+    text: 'Yaşam ve kullanım ihtiyaçlarına göre şekillenen özgün mekânsal çözümler.',
+  },
+  {
+    title: 'Mühendislik',
+    href: '/hizmetlerimiz#muhendislik-hizmetleri',
+    src: '/images/home/beton-yapi.jpg',
+    alt: 'Konsept mimari görsel: modern beton yapı',
+    text: 'Teknik gereklilikleri ve yapısal prensipleri odağa alan yaklaşım.',
+  },
+  {
+    title: 'Mekânsal Planlama',
+    href: '/hizmetlerimiz#danismanlik-ve-proje-yonetimi',
+    src: '/images/home/zeytinlik-avlu.jpg',
+    alt: 'Konsept mimari görsel: modern zeytinlik avlu geçidi',
+    text: 'İşlevsellik, malzeme ve kullanıcı deneyimini birlikte ele alan planlama.',
+  },
+] as const;
+---
+<section id="hizmetler" class="home-services" aria-labelledby="hizmetler-baslik">
+  <div class="home-services__intro">
+    <p class="home-kicker">Hizmetlerimiz</p>
+    <h2 id="hizmetler-baslik" class="home-services__title">
+      Fikirden uygulamaya,<br />bütüncül çözümler.
+    </h2>
+  </div>
+
+  <ul class="home-services__grid">
+    {cards.map((card) => (
+      <li>
+        <a href={card.href} class="home-service">
+          <div class="home-service__frame">
+            <img
+              src={card.src}
+              alt={card.alt}
+              width="1536"
+              height="1024"
+              class="home-service__img"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <h3 class="home-service__name">{card.title}</h3>
+          <p class="home-service__text">{card.text}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .home-services {
+    background: #f5f4f0;
+    color: #121212;
+    border-top: 1px solid #ece7df;
+  }
+
+  .home-kicker {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #6f6d67;
+  }
+
+  .home-services__intro {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: 5rem 1.25rem 2.75rem;
+  }
+
+  .home-services__title {
+    margin: 1rem 0 0;
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .home-services__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    list-style: none;
+  }
+
+  .home-service {
+    display: block;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .home-service__frame {
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: #ebe7df;
+  }
+
+  .home-service__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.55s ease;
+  }
+
+  .home-service:hover .home-service__img {
+    transform: scale(1.03);
+  }
+
+  .home-service__name {
+    margin: 1.15rem 0 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+
+  .home-service__text {
+    margin: 0.55rem 0 0;
+    max-width: 30rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #5c5a54;
+  }
+
+  @media (min-width: 768px) {
+    .home-services__intro {
+      padding: 6rem 3rem 3rem;
+    }
+
+    .home-services__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      padding: 0 3rem 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-services__intro {
+      padding: 7.5rem 4rem 3.5rem;
+    }
+
+    .home-services__grid {
+      gap: 2.75rem;
+      padding: 0 4rem 7.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-service__img {
+      transition: none;
+    }
+
+    .home-service:hover .home-service__img {
+      transform: none;
+    }
+  }
+</style>
