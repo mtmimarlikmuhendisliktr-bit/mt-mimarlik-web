@@ -5,14 +5,14 @@
 export const site = {
   name: 'M&T Mimarlık Mühendislik',
   shortName: 'M&T',
-  url: 'https://www.example.com', // TODO: astro.config.mjs ile aynı olmalı
+  url: 'https://mtmimarlikmuhendislik.com',
   locale: 'tr_TR',
   language: 'tr',
   tagline: 'Geleceği tasarlıyor, güvenle inşa ediyoruz.',
   description:
     'M&T Mimarlık Mühendislik; mimari tasarım ve mühendislik hizmetlerini estetik, işlevsellik ve güvenliği bir araya getirerek sunmayı hedefleyen bir mimarlık ve mühendislik markasıdır.',
   contact: {
-    email: 'tunahan@mtmimarlikmuhendislik.com',
+    email: 'info@mtmimarlikmuhendislik.com',
     // Yalnızca şehir/ülke; fiziksel ofis adresi doğrulanana kadar eklenmez.
     location: 'İstanbul, Türkiye',
   },
@@ -21,7 +21,7 @@ export const site = {
 // TODO: Gerçek sosyal medya hesap URL'lerini girin.
 export const socialLinks = [
   { label: 'Instagram', href: 'https://www.instagram.com/mtmimarlikmuhendisliktr', network: 'instagram' },
-  { label: 'LinkedIn', href: '#', network: 'linkedin' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/mt-mimarlik-muhendislik', network: 'linkedin' },
   { label: 'X', href: '#', network: 'x' },
   { label: 'Facebook', href: '#', network: 'facebook' },
   { label: 'YouTube', href: '#', network: 'youtube' },
@@ -32,13 +32,15 @@ export const nav = [
   { label: 'Hakkımızda', href: '/hakkimizda' },
   { label: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
   { label: 'Projeler', href: '/projeler' },
-  { label: 'Referanslar', href: '/referanslar' },
   { label: 'İletişim', href: '/iletisim' },
 ] as const;
 
 /**
  * Kurucu geçmiş mesleki deneyimleri — müşteri / iş ortağı listesi değildir.
- * Logo dosyaları: `public/images/references/`
+ * Sayfa şimdilik yayında değil. Geri koymak için:
+ * `backup/referanslar/referanslar.astro` → `src/pages/referanslar.astro`
+ * `backup/referanslar/logos/` → `public/images/references/`
+ * ve menüye Referanslar bağlantısını ekleyin.
  */
 export type ReferenceOrg = {
   name: string;

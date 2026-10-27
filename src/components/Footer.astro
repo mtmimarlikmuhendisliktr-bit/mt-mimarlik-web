@@ -11,12 +11,12 @@ const pagesLinks = [
   { label: 'Ana Sayfa', href: '/' },
   { label: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
   { label: 'Projeler', href: '/projeler' },
-  { label: 'Referanslar', href: '/referanslar' },
 ] as const;
 
 const corporateLinks = [
   { label: 'Hakkımızda', href: '/hakkimizda' },
   { label: 'İletişim', href: '/iletisim' },
+  { label: 'KVKK', href: '/kvkk' },
 ] as const;
 
 const socialIcons = {
@@ -135,7 +135,7 @@ function hasRealSocialHref(href: string) {
   </div>
 
   <div class="site-footer__bar">
-    <p>&copy; {year} {site.name}</p>
+    <p>&copy; {year} {site.name}. Tüm hakları saklıdır.</p>
   </div>
 </footer>
 

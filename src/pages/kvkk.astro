@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const email = site.contact.email;
+const location = site.contact.location;
+---
+<BaseLayout
+  title={`KVKK Aydınlatma Metni | ${site.name}`}
+  description="M&T Mimarlık Mühendislik kişisel verilerin korunması hakkında aydınlatma metni. İletişim formu ve e-posta yoluyla işlenen veriler ile ilgili kişi hakları."
+>
+  <main id="icerik" class="kvkk-page">
+    <section class="kvkk-hero" aria-labelledby="kvkk-baslik">
+      <div class="kvkk-hero__inner">
+        <h1 id="kvkk-baslik" class="kvkk-hero__title">KVKK Aydınlatma Metni</h1>
+      </div>
+    </section>
+
+    <article class="kvkk-body" aria-labelledby="kvkk-alt-baslik">
+      <h2 id="kvkk-alt-baslik">Kişisel Verilerin Korunması Hakkında Aydınlatma Metni</h2>
+
+      <section aria-labelledby="kvkk-1">
+        <h3 id="kvkk-1">1. Veri Sorumlusunun Kimliği</h3>
+        <p>
+          6698 sayılı Kişisel Verilerin Korunması Kanunu uyarınca kişisel verileriniz, veri sorumlusu
+          sıfatıyla {site.name} tarafından işlenmektedir.
+        </p>
+        <p>
+          Konum: {location}<br />
+          E-posta: <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="kvkk-2">
+        <h3 id="kvkk-2">2. İşlenen Kişisel Veriler</h3>
+        <p>
+          Web sitesini ziyaret etmeniz ve bizimle iletişime geçmeniz kapsamında aşağıdaki kişisel
+          veriler işlenebilmektedir:
+        </p>
+        <ul>
+          <li>Kimlik bilgileri (ad, soyad — iletişim formunda veya e-postada)</li>
+          <li>İletişim bilgileri (e-posta adresi, isteğe bağlı telefon numarası)</li>
+          <li>Talep içeriği (hizmet türü ve proje detayları)</li>
+          <li>İşlem güvenliği bilgileri (barındırma altyapısının tutabildiği IP adresi ve bağlantı kayıtları)</li>
+        </ul>
+        <p>
+          Sitede reklam veya analiz amaçlı çerez kullanılmamaktadır. İletişim formu bilgilerinizi bir
+          sunucuya kaydetmez; e-posta uygulamanızda taslak oluşturur. Veriler, gönderimi sizin
+          tamamlamanızla e-posta yoluyla iletilir.
+        </p>
+      </section>
+
+      <section aria-labelledby="kvkk-3">
+        <h3 id="kvkk-3">3. Kişisel Verilerin İşlenme Amaçları</h3>
+        <p>Kişisel verileriniz aşağıdaki amaçlarla işlenmektedir:</p>
+        <ul>
+          <li>İletişim ve proje taleplerinin alınması ve yanıtlanması</li>
+          <li>Talep edilen mimarlık ve mühendislik hizmetlerinin değerlendirilmesi</li>
+          <li>İletişimin sürdürülmesi</li>
+          <li>Bilgi güvenliği süreçlerinin yürütülmesi</li>
+          <li>Hukuki yükümlülüklerin yerine getirilmesi</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="kvkk-4">
+        <h3 id="kvkk-4">4. Kişisel Verilerin Toplanma Yöntemi ve Hukuki Sebebi</h3>
+        <p>Kişisel verileriniz aşağıdaki kanallarla toplanmaktadır:</p>
+        <ul>
+          <li>Web sitesi</li>
+          <li>İletişim formu</li>
+          <li>Doğrudan e-posta</li>
+        </ul>
+        <p>
+          Bu veriler, Kanun’un 5. maddesinde belirtilen şu hukuki sebeplere dayanılarak işlenir:
+        </p>
+        <ul>
+          <li>Bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması</li>
+          <li>Veri sorumlusunun hukuki yükümlülüğünü yerine getirmesi</li>
+          <li>Bir hakkın tesisi, kullanılması veya korunması</li>
+          <li>Temel hak ve özgürlüklere zarar vermemek kaydıyla meşru menfaatimizin bulunması</li>
+          <li>Açık rızanın gerekli olduğu hâllerde açık rızanızın bulunması</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="kvkk-5">
+        <h3 id="kvkk-5">5. Kişisel Verilerin Aktarılması</h3>
+        <p>
+          Kişisel verileriniz, işleme amacıyla sınırlı olmak ve gerekli güvenlik önlemleri alınmak
+          kaydıyla aşağıdaki alıcılara aktarılabilir:
+        </p>
+        <ul>
+          <li>Yetkili kamu kurum ve kuruluşları</li>
+          <li>E-posta ve barındırma hizmeti alınan teknik hizmet sağlayıcılar</li>
+        </ul>
+        <p>Kişisel verileriniz satılmaz ve ticari amaçla üçüncü kişilere devredilmez.</p>
+      </section>
+
+      <section aria-labelledby="kvkk-6">
+        <h3 id="kvkk-6">6. Kişisel Verilerin Saklama Süresi</h3>
+        <p>
+          Kişisel verileriniz, ilgili mevzuatta öngörülen süreler boyunca veya işleme amacının
+          gerektirdiği süre kadar muhafaza edilir. Sürenin sona ermesi halinde silinir, yok edilir
+          veya anonim hale getirilir.
+        </p>
+      </section>
+
+      <section aria-labelledby="kvkk-7">
+        <h3 id="kvkk-7">7. İlgili Kişinin Hakları</h3>
+        <p>Kanun’un 11. maddesi uyarınca ilgili kişi olarak şu haklara sahipsiniz:</p>
+        <ul>
+          <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+          <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+          <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+          <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+          <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+          <li>Kanunda öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme</li>
+          <li>Düzeltme ve silme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
+          <li>Münhasıran otomatik sistemler ile analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+          <li>Kanuna aykırı işleme sebebiyle zarara uğramanız halinde tazminat talep etme</li>
+        </ul>
+        <p>
+          Bu haklarınıza ilişkin taleplerinizi
+          <a href={`mailto:${email}`}>{email}</a>
+          adresi üzerinden iletebilirsiniz.
+        </p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .kvkk-page {
+    background: #ffffff;
+    color: #151515;
+  }
+
+  .kvkk-hero {
+    background: #ffffff;
+  }
+
+  .kvkk-hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1320px;
+    min-height: 8.5rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem 1.5rem;
+    text-align: center;
+  }
+
+  .kvkk-hero__title {
+    margin: 0;
+    font-size: clamp(2.15rem, 5vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #151515;
+  }
+
+  .kvkk-body {
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 0 1.25rem 4.5rem;
+  }
+
+  .kvkk-body h2 {
+    margin: 0 0 2.25rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+    text-align: center;
+    color: #151515;
+  }
+
+  .kvkk-body section + section {
+    margin-top: 2rem;
+  }
+
+  .kvkk-body h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    color: #151515;
+  }
+
+  .kvkk-body p,
+  .kvkk-body li {
+    font-size: 0.975rem;
+    line-height: 1.75;
+    color: #444444;
+  }
+
+  .kvkk-body p {
+    margin: 0;
+  }
+
+  .kvkk-body p + p,
+  .kvkk-body p + ul,
+  .kvkk-body ul + p {
+    margin-top: 0.85rem;
+  }
+
+  .kvkk-body ul {
+    margin: 0.85rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .kvkk-body li + li {
+    margin-top: 0.35rem;
+  }
+
+  .kvkk-body a {
+    color: #151515;
+    text-underline-offset: 0.18em;
+  }
+
+  .kvkk-body a:hover {
+    color: #000000;
+  }
+
+  @media (min-width: 768px) {
+    .kvkk-hero__inner {
+      min-height: 11.5rem;
+      padding: 3.75rem 2rem 1.75rem;
+    }
+
+    .kvkk-body {
+      padding: 0 2rem 5.5rem;
+    }
+  }
+</style>
